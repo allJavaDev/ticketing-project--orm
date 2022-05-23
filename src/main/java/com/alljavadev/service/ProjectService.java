@@ -1,6 +1,8 @@
 package com.alljavadev.service;
 
 import com.alljavadev.dto.ProjectDTO;
+import com.alljavadev.entity.User;
+
 import java.util.List;
 
 public interface ProjectService {
@@ -9,7 +11,10 @@ public interface ProjectService {
     void save(ProjectDTO dto);
     void update(ProjectDTO dto);
     void delete(String code);
+    void complete(String projectCode);
 
-    void complete(String code);
+    List<ProjectDTO> listAllProjectDetails();
+
+    List<ProjectDTO> readAllByAssignedManager(User assignedManager);
 
 }
