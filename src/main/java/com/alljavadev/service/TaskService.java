@@ -1,19 +1,33 @@
 package com.alljavadev.service;
 
+import com.alljavadev.dto.ProjectDTO;
 import com.alljavadev.dto.TaskDTO;
-import com.alljavadev.dto.UserDTO;
+import com.alljavadev.entity.User;
 import com.alljavadev.enums.Status;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface TaskService extends CrudService<TaskDTO, Long> {
+public interface TaskService  {
 
-    List<TaskDTO> findTasksByManager(UserDTO manager);
+    TaskDTO findById(Long id);
+    List<TaskDTO> listAllTasks();
+    void save(TaskDTO dto);
+    void update(TaskDTO dto);
+    void delete(Long id);
+    int totalNonCompletedTask(String projectCode);
+    int totalCompletedTask(String projectCode);
 
-    List<TaskDTO> findAllTasksByStatus(Status status);
+    void deleteByProject(ProjectDTO project);
 
-    List<TaskDTO> findAllTasksByStatusIsNot(Status status);
+    void completeByProject(ProjectDTO project);
+
+    List<TaskDTO> listAllTasksByStatusIsNot(Status status);
 
     void updateStatus(TaskDTO task);
+
+    List<TaskDTO> listAllTasksByStatus(Status status);
+
+    List<TaskDTO> readAllByAssignedEmployee(User assignedEmployee);
 
 }
